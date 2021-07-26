@@ -1,7 +1,6 @@
-package br.javai;
+package br.javai.vector;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Arrays;
 
 public class Vector {
 
@@ -44,7 +43,18 @@ public class Vector {
    * Vetor após chamada = {1, 2, 10, 3, 4, 5}
    */
   public void store(Integer index, Integer value){
-    //Escreva aqui o código necessário para executar a ação dos comentários acima
+    Integer[] newVect = new Integer[vect.length+1];
+    for (int i = 0; i < index; i++) {
+      newVect[i] = vect[i];
+    }
+
+    newVect[index] = value;
+
+    for (int i = index + 1; i < newVect.length; i++) {
+      newVect[i] = vect[i-1];
+    }
+
+    vect = newVect;
   }
 
   /**
@@ -57,7 +67,39 @@ public class Vector {
    * Vetor após chamada = {1, 2, 4, 5}
    */
   public void extract(Integer index){
-    //Escreva aqui o código necessário para executar a ação definida nos comentários acima
+    Integer[] newVect = new Integer[vect.length-1];
+    for (int i = 0; i < index; i++) {
+      newVect[i] = vect[i];
+    }
+
+    for (int i = index + 1; i < vect.length; i++) {
+      newVect[i-1] = vect[i];
+    }
+
+    vect = newVect;
+  }
+
+  public Integer[] getVect() {
+    return vect;
+  }
+
+  public Integer getElement(int pos){
+    return vect[pos];
+  }
+
+  public void setElement(int pos, int value){
+    vect[pos] = value;
+  }
+
+  @Override
+  public String toString() {
+    return "Vector{" +
+            "vect=" + Arrays.toString(vect) +
+            '}';
+  }
+
+  public Integer size(){
+    return vect.length;
   }
 
 }
